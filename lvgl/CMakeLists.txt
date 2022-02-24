@@ -19,6 +19,7 @@ include_directories(lvgl_src/lv_drivers/)
 include_directories(lvgl_src/lv_drivers/display/)
 include_directories(lvgl_src/lv_drivers/indev/)
 include_directories(lvgl_src/gui/)
+include_directories(/usr/local/freetype/include/freetype2)
 
 #file(GLOB_RECURSE INCLUDES "./*.h" ) #获取lvg_src目录下的全部的头文件
 #message("INCLUDES : ${INCLUDES}")
@@ -35,10 +36,13 @@ add_executable(little_prj ${DIR_SRCS})  #链接生成文件little_prj 由DIR_SRC
 #链接lvgl_lib lv_drivers_lib gui_lib
 target_link_libraries(little_prj ${VAR})   #设置链接little_prj的依赖关系 , 依赖 VAR = lvgl_drivers gui
 
+target_link_libraries(little_prj /usr/local/freetype/lib/libfreetype.so)
+
 #链接lpthread
 find_package(Threads)
 target_link_libraries(little_prj ${CMAKE_THREAD_LIBS_INIT})
 message("CMAKE_THREAD_LIBS_INIT : ${CMAKE_THREAD_LIBS_INIT}")
+
 
 #添加lvgl_src目录
 add_subdirectory(lvgl_src)
